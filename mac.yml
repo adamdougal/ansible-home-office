@@ -26,6 +26,7 @@
         - tig
         - python
         - gradle
+        - maven
 
     - name: install brew cask
       command: brew install caskroom/cask/brew-cask
@@ -59,3 +60,6 @@
       shell: brew cask install {{ item }}
       with_items: applications
       when: item not in installed_applications.results|map(attribute='stdout')
+
+    - name: Show hidden files
+      command: defaults write com.apple.finder AppleShowAllFiles YES
