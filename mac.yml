@@ -7,6 +7,8 @@
        - virtualbox
        - caffeine
        - google-drive
+       - java6
+       - java7
        - java
        - iterm2
        - skype
@@ -27,6 +29,9 @@
     - name: install brew cask
       command: brew install caskroom/cask/brew-cask
 
+    - name: add caskroom/versions
+      command: brew tap caskroom/versions
+ 
     - name: install functions etc to home directory
       copy: src={{ item }} dest={{ home_dir }}
       with_items:
