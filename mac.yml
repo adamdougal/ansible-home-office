@@ -1,0 +1,55 @@
+---
+- hosts: dev
+  remote_user: dougala
+  vars:
+    - home_dir: /Users/dougala/
+    - applications:
+       - virtualbox
+       - caffeine
+       - google-drive
+       - java
+       - iterm2
+       - skype
+       - vagrant
+       - intellij-idea-ce
+       - sublime-text
+       - google-chrome
+  
+  tasks:
+    - name: install brew packages
+      homebrew: update_homebrew=yes name={{ item }}
+      with_items:
+        - htop
+        - wget
+        - tig
+        - python
+
+    - name: install brew cask
+      command: brew install caskroom/cask/brew-cask
+
+    - name: install functions etc to home directory
+      copy: src={{ item }} dest={{ home_dir }}
+      with_items:
+        - functions.sh
+        - .git-completion.bash
+        - .gitconfig
+
+    - name: source functions in bash home
+      lineinfile: dest=~/.bash_profile line="source ~/functions.sh" create=yes
+    
+    - name: source git completions
+      lineinfile: dest=~/.bash_profile line="source ~/.git-completion.bash" create=yes
+
+    - name: create workspace directory
+      file: path={{ home_dir }}workspace state=directory
+
+    - name: Check for installed apps(casks)
+      shell: brew cask list | grep {{ item }}
+      register: installed_applications
+      with_items: applications
+      ignore_errors: true
+
+    - name: Install apps with brew-cask   
+      shell: brew cask install {{ item }}
+      with_items: applications
+      when: item not in installed_applications.results|map(attribute='stdout')
