@@ -25,6 +25,7 @@
         - wget
         - tig
         - python
+        - gradle
 
     - name: install brew cask
       command: brew install caskroom/cask/brew-cask
