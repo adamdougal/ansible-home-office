@@ -4,30 +4,30 @@
   vars:
     - home_dir: /Users/dougala/
     - applications:
-       - virtualbox
        - caffeine
        - google-drive
+       - google-chrome
+       - intellij-idea-ce
+       - iterm2
        - java6
        - java7
        - java
-       - iterm2
        - skype
-       - vagrant
-       - intellij-idea-ce
        - sonos
        - sublime-text
-       - google-chrome
-  
+       - vagrant
+       - virtualbox
+
   tasks:
     - name: install brew packages
       homebrew: update_homebrew=yes name={{ item }}
       with_items:
         - htop
-        - wget
-        - tig
-        - python
         - gradle
         - maven
+        - python
+        - tig
+        - wget
 
     - name: install brew cask
       command: brew install caskroom/cask/brew-cask
