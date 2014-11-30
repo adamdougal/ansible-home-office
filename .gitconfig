@@ -1,5 +1,13 @@
 [user]
   name = Adam Dougal
   email = barmybuckle@gmail.com
+
+[core]
+    editor = vim
+
 [alias]
     st = status
+    glogs = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+[color]
+    ui = true
