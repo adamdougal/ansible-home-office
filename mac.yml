@@ -5,6 +5,7 @@
     - home_dir: /Users/dougala/
     - applications:
        - caffeine
+       - dropbox
        - google-drive
        - google-chrome
        - intellij-idea-ce
