@@ -27,6 +27,7 @@
       homebrew: update_homebrew=yes name={{ item }}
       with_items:
         - htop
+        - gpg
         - gradle
         - maven
         - python
@@ -68,3 +69,4 @@
 
     - name: Show hidden files
       command: defaults write com.apple.finder AppleShowAllFiles YES
+
