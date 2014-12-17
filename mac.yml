@@ -23,7 +23,7 @@
        - virtualbox
 
   tasks:
-    - name: install brew packages
+    - name: Install brew packages
       homebrew: update_homebrew=yes name={{ item }}
       with_items:
         - htop
@@ -34,26 +34,26 @@
         - tig
         - wget
 
-    - name: install brew cask
+    - name: Install brew cask
       command: brew install caskroom/cask/brew-cask
 
-    - name: add caskroom/versions
+    - name: Add caskroom/versions
       command: brew tap caskroom/versions
- 
-    - name: install functions etc to home directory
+
+    - name: Install functions etc to home directory
       copy: src={{ item }} dest={{ home_dir }}
       with_items:
         - functions.sh
         - .git-completion.bash
         - .gitconfig
 
-    - name: source functions in bash home
+    - name: Source functions in bash home
       lineinfile: dest=~/.bash_profile line="source ~/functions.sh" create=yes
-    
-    - name: source git completions
+
+    - name: Source git completions
       lineinfile: dest=~/.bash_profile line="source ~/.git-completion.bash" create=yes
 
-    - name: create workspace directory
+    - name: Create workspace directory
       file: path={{ home_dir }}workspace state=directory
 
     - name: Check for installed apps(casks)
@@ -66,6 +66,28 @@
       shell: brew cask install {{ item }}
       with_items: applications
       when: item not in installed_applications.results|map(attribute='stdout')
+
+# TODO Check if RVM is installed first
+    - name: Add RVM key
+      shell: "gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3"
+
+    - name: Download RVM installer
+      get_url:
+        url: "https://get.rvm.io"
+        dest: "~/rvm-installer.sh"
+
+    - name: Make RVM installer executable
+      file:
+        path: "~/rvm-installer.sh"
+        mode: 0755
+
+    - name: Install RVM
+      command: "~/rvm-installer.sh stable"
+
+    - name: Remove RVM installer
+      file:
+        path: "~/rvm-installer.sh"
+        state: absent
 
     - name: Show hidden files
       command: defaults write com.apple.finder AppleShowAllFiles YES
