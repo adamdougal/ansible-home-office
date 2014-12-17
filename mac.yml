@@ -95,6 +95,9 @@
     - name: Set JRuby 1.7.9 as default
       command: "~/.rvm/bin/rvm alias create default jruby-1.7.9"
 
+    - name: Use JRuby 1.7.9
+      command: "~/.rvm/bin/rvm use jruby-1.7.9"
+
     - name: Show hidden files
       command: defaults write com.apple.finder AppleShowAllFiles YES
 
