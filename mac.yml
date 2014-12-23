@@ -13,10 +13,12 @@
        - java6
        - java7
        - java
+       - origin
        - skype
        - sonos
        - spotify
        - spotify-notifications
+       - steam
        - sublime-text
        - teamviewer
        - vagrant
