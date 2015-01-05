@@ -28,6 +28,7 @@
     - name: Install brew packages
       homebrew: update_homebrew=yes name={{ item }}
       with_items:
+        - brew-cask
         - htop
         - gpg
         - gradle
@@ -36,11 +37,11 @@
         - tig
         - wget
 
-    - name: Install brew cask
-      command: brew install caskroom/cask/brew-cask
+    - name: Tap caskroom/versions
+      homebrew_tap: tap=caskroom/versions
 
-    - name: Add caskroom/versions
-      command: brew tap caskroom/versions
+    - homebrew_cask: name={{ item }} state=installed
+      with_items: applications
 
     - name: Install functions etc to home directory
       copy: src={{ item }} dest={{ home_dir }}
@@ -57,17 +58,6 @@
 
     - name: Create workspace directory
       file: path={{ home_dir }}workspace state=directory
-
-    - name: Check for installed apps(casks)
-      shell: brew cask list | grep {{ item }}
-      register: installed_applications
-      with_items: applications
-      ignore_errors: true
-
-    - name: Install apps with brew-cask   
-      shell: brew cask install {{ item }}
-      with_items: applications
-      when: item not in installed_applications.results|map(attribute='stdout')
 
 # TODO Check if RVM is installed first
     - name: Add RVM key
