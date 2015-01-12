@@ -13,6 +13,7 @@
        - java6
        - java7
        - java
+       - macports
        - origin
        - skype
        - sonos
@@ -93,3 +94,13 @@
     - name: Show hidden files
       command: defaults write com.apple.finder AppleShowAllFiles YES
 
+# INSTALL CCM
+    - name: Install ccm dependencies
+      easy_install: name={{ item }}
+      with_items:
+        - six
+        - pyYaml
+        - psutil
+
+    - name: Checkout ccm
+      git: repo=https://github.com/pcmanus/ccm.git dest=~/temp/ccm
