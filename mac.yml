@@ -6,6 +6,7 @@
     - applications:
        - caffeine
        - dropbox
+       - eclipse-ide
        - google-drive
        - google-chrome
        - intellij-idea-ce
