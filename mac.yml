@@ -4,6 +4,7 @@
   vars:
     - home_dir: /Users/dougala/
     - applications:
+       - adobe-reader
        - caffeine
        - dropbox
        - eclipse-ide
@@ -16,6 +17,7 @@
        - java
        - macports
        - origin
+       - scala-ide
        - skype
        - sonos
        - spotify
@@ -36,6 +38,8 @@
         - gradle
         - maven
         - python
+        - scala
+        - SBT
         - tig
         - wget
 
