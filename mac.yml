@@ -3,7 +3,17 @@
   remote_user: dougala
   vars:
     - home_dir: /Users/dougala/
-    - applications:
+    - brew_packages:
+       - brew-cask
+       - htop
+       - gradle
+       - maven
+       - python
+       - scala
+       - SBT
+       - tig
+       - wget
+    - cask_packages:
        - caffeine
        - dropbox
        - google-drive
@@ -21,84 +31,7 @@
        - sublime-text
        - vagrant
        - virtualbox
-
-  tasks:
-    - name: Install brew packages
-      homebrew: update_homebrew=yes name={{ item }}
-      with_items:
-        - brew-cask
-        - htop
-        - gradle
-        - maven
-        - python
-        - scala
-        - SBT
-        - tig
-        - wget
-
-    - name: Tap caskroom/versions
-      homebrew_tap: tap=caskroom/versions
-
-    - homebrew_cask: name={{ item }} state=installed
-      with_items: applications
-
-    - name: Install functions etc to home directory
-      copy: src={{ item }} dest={{ home_dir }}
-      with_items:
-        - functions.sh
-        - .git-completion.bash
-        - .gitconfig
-
-    - name: Source functions in bash home
-      lineinfile: dest=~/.bash_profile line="source ~/functions.sh" create=yes
-
-    - name: Source git completions
-      lineinfile: dest=~/.bash_profile line="source ~/.git-completion.bash" create=yes
-
-    - name: Create workspace directory
-      file: path={{ home_dir }}workspace state=directory
-
-# TODO Check if RVM is installed first
-    - name: Add RVM key
-      shell: "gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3"
-
-    - name: Download RVM installer
-      get_url:
-        url: "https://get.rvm.io"
-        dest: "~/rvm-installer.sh"
-
-    - name: Make RVM installer executable
-      file:
-        path: "~/rvm-installer.sh"
-        mode: 0755
-
-    - name: Install RVM
-      command: "~/rvm-installer.sh stable"
-
-    - name: Remove RVM installer
-      file:
-        path: "~/rvm-installer.sh"
-        state: absent
-
-    - name: Install JRuby 1.7.9
-      command: "~/.rvm/bin/rvm install jruby-1.7.9"
-
-    - name: Set JRuby 1.7.9 as default
-      command: "~/.rvm/bin/rvm alias create default jruby-1.7.9"
-
-    - name: Use JRuby 1.7.9
-      command: "~/.rvm/bin/rvm use jruby-1.7.9"
-
-    - name: Show hidden files
-      command: defaults write com.apple.finder AppleShowAllFiles YES
-
-# INSTALL CCM
-    - name: Install ccm dependencies
-      easy_install: name={{ item }}
-      with_items:
-        - six
-        - pyYaml
-        - psutil
-
-    - name: Checkout ccm
-      git: repo=https://github.com/pcmanus/ccm.git dest=~/temp/ccm
+  roles:
+    - general
+#    - ruby
+#    - ccm

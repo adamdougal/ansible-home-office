@@ -1,0 +1,10 @@
+---
+- name: Install ccm dependencies
+  easy_install: name={{ item }}
+  with_items:
+    - six
+    - pyYaml
+    - psutil
+
+- name: Checkout ccm
+  git: repo=https://github.com/pcmanus/ccm.git dest=~/temp/ccm

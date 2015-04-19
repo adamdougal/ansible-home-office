@@ -1,0 +1,31 @@
+---
+# TODO Check if RVM is installed first
+- name: Add RVM key
+  shell: "gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3"
+
+- name: Download RVM installer
+  get_url:
+    url: "https://get.rvm.io"
+    dest: "~/rvm-installer.sh"
+
+- name: Make RVM installer executable
+  file:
+    path: "~/rvm-installer.sh"
+    mode: 0755
+
+- name: Install RVM
+  command: "~/rvm-installer.sh stable"
+
+- name: Remove RVM installer
+  file:
+    path: "~/rvm-installer.sh"
+    state: absent
+
+- name: Install JRuby 1.7.9
+  command: "~/.rvm/bin/rvm install jruby-1.7.9"
+
+- name: Set JRuby 1.7.9 as default
+  command: "~/.rvm/bin/rvm alias create default jruby-1.7.9"
+
+- name: Use JRuby 1.7.9
+  command: "~/.rvm/bin/rvm use jruby-1.7.9"
