@@ -4,10 +4,8 @@
   vars:
     - home_dir: /Users/dougala/
     - applications:
-       - adobe-reader
        - caffeine
        - dropbox
-       - firefox
        - google-drive
        - google-chrome
        - intellij-idea-ce
@@ -16,14 +14,11 @@
        - java7
        - java
        - macports
-       - origin
        - skype
        - sonos
        - spotify
        - spotify-notifications
-       - steam
        - sublime-text
-       - teamviewer
        - vagrant
        - virtualbox
 
@@ -33,7 +28,6 @@
       with_items:
         - brew-cask
         - htop
-        - gpg
         - gradle
         - maven
         - python
