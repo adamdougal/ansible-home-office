@@ -24,6 +24,7 @@
        - java7
        - java
        - macports
+       - origin
        - skype
        - sonos
        - spotify
@@ -33,5 +34,5 @@
        - virtualbox
   roles:
     - general
-#    - ruby
-#    - ccm
+    - ruby
+    - ccm
