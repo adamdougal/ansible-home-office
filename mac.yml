@@ -13,6 +13,7 @@
        - SBT
        - tig
        - wget
+       - ccm
     - cask_packages:
        - caffeine
        - dropbox
