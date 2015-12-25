@@ -4,17 +4,22 @@
   vars:
     - home_dir: /Users/dougala/
     - brew_packages:
+       - boot2docker
        - brew-cask
+       - ccm
        - htop
        - gradle
        - maven
+       - node
+       - phantomjs198
        - python
        - scala
        - SBT
        - tig
        - wget
-       - ccm
     - cask_packages:
+       - adobe-reader
+       - bettertouchtool
        - caffeine
        - dropbox
        - google-drive
@@ -24,15 +29,18 @@
        - java6
        - java7
        - java
-       - macports
        - origin
+       - shiftit
        - skype
+       - slack
        - sonos
        - spotify
        - spotify-notifications
        - sublime-text
+       - teamviewer
        - vagrant
        - virtualbox
+       - yed
   roles:
     - general
     - ruby
